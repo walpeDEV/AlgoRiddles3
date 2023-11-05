@@ -1,0 +1,38 @@
+$prime: #ff6e48;
+$ciBlue: #00fff1;
+$ciRed: #ff00aa;
+$ciWhite: #ffffff;
+$ciGreen: #46fcb4;
+$second: #0c1016;
+
+
+$clr-background: var(--clr-background);
+$clr-secondary: var(--clr-secondary);
+$clr-prime: var(--clr-prime);
+
+body,
+html {
+	width: 100vw;
+	min-height: 100vh;
+	background-color: $clr-background;
+	color: $clr-prime;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	background-color: $clr-secondary;
+	padding: 6px;
+	margin: 3px;
+	font-size: 16px;
+	min-width: 100px;
+	width: auto;
+	color: $clr-prime;
+	border: 2px solid $clr-prime;
+	border-radius: 10px;
+}
+
+* {
+	box-sizing: border-box;
+}
