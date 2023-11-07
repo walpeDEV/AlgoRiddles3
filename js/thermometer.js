@@ -48,8 +48,7 @@ class Thermometer {
         return -1;
     }
     addValue(cellIndex,value) {
-        if(!this.isValuePossible(cellIndex,value)) throw new Error("Can't add Value to Thermometer-Cell, because it's not a valid value." + cellIndex + value)
-        if(isNaN(value)||value<=0||value>=10) throw new TypeError("Can't add Value to Thermometer-Cell, because surpassed value contains not a number, or is out of Range.");
+        if(!this.isValuePossible(cellIndex,value)) throw new Error("Can't add Value to Thermometer-Cell, because it's not a valid value." + cellIndex + value);
         value = Math.floor(value);
         if(this.#state===Thermometer.STATE_TYPES.notDefined) {
             this.#state = value%2;

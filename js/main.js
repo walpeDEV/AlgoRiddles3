@@ -94,6 +94,7 @@ let startTime = 0;
 let endTime = 0;
 
 let results = [];
+let wrongSudokus = [];
 
 let lastIrritationChanged=true;
 let backTrack = {
@@ -514,6 +515,10 @@ const solve2 = function() {
                     if(backTrack.canNotWork[notWorked[0]][notWorked[1]]===undefined) backTrack.canNotWork[notWorked[0]][notWorked[1]] = [];
                     backTrack.canNotWork[notWorked[0]][notWorked[1]].push(notWorked[2][backTrack.counter3]);
 
+                    
+                    let newSudkoField = structuredClone(sudkoField);
+                    newSudkoField[notWorked[0]][notWorked[1]] = notWorked[2];
+
                     sudkoField = structuredClone(backTrack.oldSudoku);
                     // cellsPossibles = structuredClone(backTrack.oldBackTrack.cellsPossibles);
                     thermometersObj = cloneThermo(backTrack.oldBackTrack.thermoObj,true)
@@ -559,6 +564,15 @@ const solve2 = function() {
 };
 
 const addCellValue = function(x,y,value) {
+    /*if(false) {
+        let newSudoku = structuredClone(sudkoField);
+        newSudoku[x][y] = value;
+        for(let i in wrongSudokus) {
+            if(checkSudokus(wrongSudokus[i],newSudoku,false)) {
+                throw new Error('Sudoku already checked');
+            }
+        }
+    }*/
     for(let t in thermometersObj) {
         let part = thermometersObj[t].isCellPart([x,y]);
         if(part!==-1) {
@@ -566,6 +580,17 @@ const addCellValue = function(x,y,value) {
         }
     }
     sudkoField[x][y] = value;
+}
+
+const checkSudokus = function(sudoku1, sudoku2, partOff) {
+    for(let x = 0; x < 9; x++) {
+        for(let y = 0; y < 9; y++) {
+            if(sudoku1[x][y]!==undefined||partOff) {
+                if(sudoku1[x][y]!==sudoku2[x][y]) return false;
+            }
+        }
+    }
+    return true;
 }
 
 const exit = function() {
